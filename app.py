@@ -34,8 +34,8 @@ def display_form():
 
     username = ""
 
-    name = "No name"
-    user_repos = "No repos"
+    name = ""
+    user_repos = ""
 
     if request.method == "POST":
         username = request.form["username"]
@@ -54,6 +54,12 @@ def display_form():
         name=name,
         repos=user_repos
     )
+
+
+@app.errorhandler(500)
+def user_not_found(error):
+    return render_template("form.html",
+                           name="This user does not exist!")
 
 
 if __name__ == '__main__':
